@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Projet0704</string>
+    <string name="temperature">NaN°C</string>
+    <string name="id_capteur">id</string>
+</resources>
