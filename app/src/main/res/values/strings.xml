@@ -2,4 +2,7 @@
     <string name="app_name">Projet0704</string>
     <string name="temperature">NaN°C</string>
     <string name="id_capteur">id</string>
+    <string name="ipv4">IPv4</string>
+    <string name="port">Port</string>
+    <string name="valider">Valider</string>
 </resources>

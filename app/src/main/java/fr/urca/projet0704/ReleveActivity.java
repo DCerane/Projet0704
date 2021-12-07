@@ -3,6 +3,7 @@ package fr.urca.projet0704;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -24,7 +25,7 @@ import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity {
+public class ReleveActivity extends AppCompatActivity {
 
     // Attributs pour l'affichage des données
     public final int MAX_POINTS = 11;
@@ -37,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private int[] capteurs;
 
     // Attributs pour la communication avec serveur
-    public final String ADRESSE = "192.168.1.11"; // IPv4 locale (cmd:> ipconfig)
+    public final String ADRESSE = "192.168.1.14"; // IPv4 locale (cmd:> ipconfig)
     public final int PORT = 8888;
     private Thread client;
 
@@ -55,6 +56,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Récupération de l'adresse et du port
+        SharedPreferences sp = getSharedPreferences("sp", MODE_PRIVATE);
+        String ADRESSE = sp.getString("adresse", null);
+        int PORT = sp.getInt("port", 0);
 
         // Initialisation des Views
         tabLayout = findViewById(R.id.capteurs);
@@ -134,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             } catch (IOException e) {
                 Log.e("client", "Erreur lors de l'initialisation de la Socket et du BufferedReader : "+e);
-                runOnUiThread(() -> Toast.makeText(MainActivity.this, "Erreur lors de l'initialisation de la Socket et du BufferedReader : " + e, Toast.LENGTH_LONG).show());
+                runOnUiThread(() -> Toast.makeText(ReleveActivity.this, "Erreur lors de l'initialisation de la Socket et du BufferedReader : " + e, Toast.LENGTH_LONG).show());
                 try {
                     Thread.sleep(4000);
                 } catch (InterruptedException interruptedException) {
